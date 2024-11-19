@@ -1,15 +1,14 @@
 # Use the official Python image as a base image
 FROM python:3.9
 
-# Install system dependencies (including tesseract-ocr)
-# Ensure you update the package index and install necessary packages
+# Install system dependencies including tesseract-ocr and poppler-utils
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    tesseract-ocr && \
+    tesseract-ocr poppler-utils && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
 # Copy the requirements.txt file into the container
@@ -21,7 +20,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the rest of the application code into the container
 COPY . .
 
-# Expose the port Streamlit uses (8501)
+# Expose the port that Streamlit uses (8501)
 EXPOSE 8501
 
 # Command to run the Streamlit app
