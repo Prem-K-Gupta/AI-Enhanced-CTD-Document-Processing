@@ -7,6 +7,9 @@ from PIL import Image
 from transformers import pipeline
 import tempfile
 
+pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
+
+
 def extract_text_with_pdfplumber(pdf_path):
     text_content = []
     with pdfplumber.open(pdf_path) as pdf:
